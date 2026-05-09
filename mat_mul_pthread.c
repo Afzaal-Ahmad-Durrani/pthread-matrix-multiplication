@@ -32,6 +32,17 @@ double *matrixC;
 
 int thread_count;
 
+// this functions returns a random double between the given range
+double get_random_number(double min, double max)
+{
+    // double between 0.0 and 1.0
+    double number  = (double)rand() / (double)RAND_MAX;
+    // scaling the double between the given range
+    return min + number * (max - min);       // random double between min and max
+}
+
+
+
 int main(int argc, char *argv[])
 {
     if (argc != 6)
@@ -63,7 +74,7 @@ int main(int argc, char *argv[])
     matrixB = malloc(row2 * col2 * sizeof(double));
     matrixC = malloc(row1 * col2 * sizeof(double));
 
-    
+
 
     return 0;
 }

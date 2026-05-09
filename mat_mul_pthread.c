@@ -40,47 +40,10 @@ double get_random_number(double min, double max)
 {
     // double between 0.0 and 1.0
     double number = (double)rand() / (double)RAND_MAX;
-    double number = (double)rand() / (double)RAND_MAX;
     // scaling the double between the given range
     return min + number * (max - min); // random double between min and max
 }
 
-// this function will be executed by each of the thread
-void *mat_mul(void *args)
-{
-    long thread_id = (long)args;
-    // printf("Hello from thread %ld\n", thread_id);
-
-    int local_r1 = row1 / thread_count; // local rows for each of the thread
-    int reminder = row1 % thread_count;
-
-    int first_row = thread_id * local_r1;
-
-    if (thread_id == thread_count - 1)
-    {
-        // if the rows are not completly divisible then the reamining rows
-        // will be assigned to the last thread.
-        local_r1 = local_r1 + reminder;
-    }
-
-    int last_row = first_row + local_r1;
-
-    // perform the matrix multiplication into the global matrixC
-    for (int i = first_row; i < last_row; i++)
-    {
-        for (int j = 0; j < col2; j++)
-        {
-            matrixC[i * col2 + j] = 0.0;
-            for (int k = 0; k < col1; k++)
-            {
-                // multiply and populate the resultent matrix
-                matrixC[i * col2 + j] += matrixA[i * col1 + k] * matrixB[k * col2 + j];
-            }
-        }
-    }
-}
-    return min + number * (max - min); // random double between min and max
-}
 
 // this function will be executed by each of the thread
 void *mat_mul(void *args)

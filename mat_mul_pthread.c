@@ -91,7 +91,6 @@ int main(int argc, char *argv[])
 
     // Seed for the random number generator
     srand(time(NULL));
-    srand(time(NULL));
 
     // initializing the values for the thread count and dimensions of the the matrices
     thread_count = atoi(argv[1]);
@@ -177,7 +176,7 @@ int main(int argc, char *argv[])
 
     for (long thread = 0; thread < thread_count; thread++)
     {
-        pthread_create(thread_handle, NULL, mat_mul, (void *)thread);
+        pthread_create(&thread_handle[thread], NULL, mat_mul, (void *)thread);
     }
 
     for (long thread = 0; thread < thread_count; thread++)
@@ -195,7 +194,7 @@ int main(int argc, char *argv[])
     r = (row1 > 5) ? 5 : row1;
     c = (col2 > 5) ? 5 : col2;
 
-    for (int i = 0; i < r ; r++)
+    for (int i = 0; i < r ; i++)
     {
         for (int j = 0; j < c; j++)
         {
